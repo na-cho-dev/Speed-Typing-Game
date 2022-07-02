@@ -21,15 +21,13 @@ body{
 .head{
     width: 100%;
     display: flex;
-    justify-content: center;
-
+    align-items: center;
+    justify-content: space-between;
 }
 .head h1{
-    justify-items: center;
+    font-size: 1.5em;
 }
 .head #levels{
-    position: absolute;
-    right: 2em;
     width: 100%;
     max-width: 90px;
     padding: .8em;
