@@ -56,11 +56,33 @@ body{
 #message1{
     color: #e40000;
     font-size: 1.2em;
+    animation: animate-game-over 1s;
+    display: none;
 }
+
+/* Animating the "Game over" message */
+
+@keyframes animate-game-over {
+    from {
+        transform: translateX(-15px);
+    }
+}
+
 #message2{
     color: #00b100;
     font-size: 1.2em;
+    animation: animate-correct 1s;
+    display: none;
 }
+
+/* Animating the "correct" message */
+
+@keyframes animate-correct {
+    from {
+        transform: translateY(-15px);
+    }
+}
+
 #seconds{
     color: #f81d00;
 }
