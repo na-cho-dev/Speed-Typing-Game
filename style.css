@@ -59,7 +59,7 @@ body {
 #message {
   font-size: 1.2em;
   display: none;
-  margin-top: 1.5em;
+  margin-top: 1em;
 }
 
 .success {
@@ -127,7 +127,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3em auto;
+  margin: 1.5em auto;
   color: #221208;
   background-color: #fca771;
   width: 80%;
