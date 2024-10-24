@@ -340,18 +340,21 @@ window.addEventListener('load', getScores);
 
 // MODAL SCRIPT
 let mainModal = document.querySelector('.mainModal');
-//let modal = document.querySelector('.modal');
+let modal = document.querySelector('.modal');
 let highScore = document.querySelector('#highScore');
 let closeModal = document.querySelector('.closeModal');
 
 let hideModal = () => {
   mainModal.style.display = 'none';
+  modal.style.display = 'none';
 };
 let close = () => {
   mainModal.style.display = 'none';
+  modal.style.display = 'none';
 };
 let openModal = () => {
   mainModal.style.display = 'flex';
+  modal.style.display = 'block';
 };
 
 window.addEventListener('load', hideModal);

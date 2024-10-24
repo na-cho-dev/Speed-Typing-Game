@@ -8,17 +8,18 @@ body {
   color: white;
   text-align: center;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  width: 100vw;
+  overflow-x: hidden;
 }
 .container {
   margin: auto;
   width: 90%;
   max-width: 920px;
 }
-.header {
-  background-color: #221208;
+/* .header {
   height: 5vh;
   align-content: center;
-}
+} */
 .head {
   width: 100%;
   padding: 2em 0;
@@ -233,17 +234,15 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-section {
-  min-height: 90vh;
-  align-content: center;
-}
+/* section {
+  background-color: aqua;
+} */
 
 footer {
   background-color: #552406;
-  width: 100vw;
-  height: 5vh;
-  padding: 0.5em;
+  padding: 1em;
   align-content: center;
+  margin-top: 3em;
 }
 
 footer a {
