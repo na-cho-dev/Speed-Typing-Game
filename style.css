@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #2e180a;
+  background-color: #221208;
   color: white;
   text-align: center;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -15,13 +15,13 @@ body {
   max-width: 920px;
 }
 .header {
-  background-color: #552406;
-  padding: 1em;
-  height: 10vh;
+  background-color: #221208;
+  height: 5vh;
   align-content: center;
 }
 .head {
   width: 100%;
+  padding: 2em 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,7 +31,7 @@ body {
 }
 .head #levels {
   width: 100%;
-  max-width: 90px;
+  max-width: 120px;
   padding: 0.8em;
   border: none;
   border-radius: 5px;
@@ -39,7 +39,7 @@ body {
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background: #8f8f8f;
+  background: #fca771;
   color: white;
 }
 
@@ -55,38 +55,37 @@ body {
 .info {
   font-size: 1.1em;
 }
-#message1 {
-  color: #e40000;
+#message {
   font-size: 1.2em;
-  animation: animate-game-over 1s;
   display: none;
+  margin-top: 1.5em;
 }
 
-/* Animating the "Game over" message */
+.success {
+  background-color: #00592c;
+  padding: 0.5em 1.5em;
+  border-radius: 5px;
+  color: #a1ffd0;
+  animation: animate-message 1s;
+}
+.failure {
+  background-color: #770800;
+  padding: 0.5em 1.5em;
+  border-radius: 5px;
+  color: #ffa7a1;
+  animation: animate-message 1s;
+}
 
-@keyframes animate-game-over {
+/* Animating the message */
+
+@keyframes animate-message {
   from {
-    transform: translateX(-15px);
-  }
-}
-
-#message2 {
-  color: #00b100;
-  font-size: 1.2em;
-  animation: animate-correct 1s;
-  display: none;
-}
-
-/* Animating the "correct" message */
-
-@keyframes animate-correct {
-  from {
-    transform: translateY(-15px);
+    transform: translateY(25px);
   }
 }
 
 #seconds {
-  color: #f81d00;
+  color: #fca771;
 }
 
 #currentWord {
@@ -95,11 +94,16 @@ body {
   margin: 15px auto;
 }
 
+.starter {
+  display: flex;
+  gap: 1.2em;
+  height: fit-content;
+}
 .starter input {
   outline: none;
-  padding: 7px;
-  width: 90%;
-  max-width: 400px;
+  padding: 1em;
+  width: 80%;
+  max-width: 500px;
   text-align: center;
   border: none;
   border-radius: 5px;
@@ -121,19 +125,28 @@ body {
 .timeAndScoreCol {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 3em auto;
+  color: #221208;
+  background-color: #fca771;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 3px;
+  padding: 0.5em 1.5em;
 }
 
 .instruction {
-  background: #552406;
+  background: #fca771;
+  color: #221208;
   width: 80%;
   max-width: 500px;
-  padding: 1em;
-  height: 7em;
+  padding: 2em;
+  margin-top: 1.5em;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  gap: 1em;
   border-radius: 3px;
 }
 
@@ -144,15 +157,15 @@ body {
   margin: 1.5em auto;
   width: 8em;
   text-align: center;
-  border: 2px solid #f81d00;
-  background-color: transparent;
+  border: 2px solid #fca771;
+  background-color: #fca771;
   border-radius: 5px;
-  color: white;
+  color: #552406;
 }
 .mainModal {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   position: fixed;
   top: 0;
@@ -165,10 +178,11 @@ body {
 }
 .modal {
   position: relative;
-  width: 90%;
-  max-width: 350px;
+  width: 100%;
+  max-width: 400px;
   background: #552406;
   padding: 1em;
+  margin-top: 10em;
   border-radius: 5px;
   animation-name: animateTop;
   animation-duration: 0.4s;
@@ -185,7 +199,16 @@ body {
 }
 .modal h3 {
   margin: 0.8em 0 0.8em 0;
-  color: #f81d00;
+  color: #fca771;
+}
+.modalHead {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+}
+.modalHead h3 {
+  margin: 0;
+  justify-self: center;
 }
 .modalCont {
   display: grid;
@@ -194,33 +217,36 @@ body {
   align-items: center;
   margin: 0.5em 0;
 }
+
+.modalCont .scoreStyle {
+  color: #fca771;
+}
 .closeModal {
-  width: 1.5em;
+  grid-column: 1;
+  width: 3em;
+  font-size: 1.5em;
+  align-content: center;
   cursor: pointer;
   font-weight: bolder;
-  border: 2px solid #f81d00;
   padding: 1px 5px;
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
 }
-.closeModal:hover {
-  border: 2px solid #2e180a;
-}
 
 section {
-  min-height: 80vh;
+  min-height: 90vh;
   align-content: center;
 }
 
 footer {
   background-color: #552406;
   width: 100vw;
-  height: 10vh;
-  padding: 1em;
+  height: 5vh;
+  padding: 0.5em;
   align-content: center;
 }
 
 footer a {
-  color: dodgerblue;
+  color: #fca771;
   text-decoration: none;
 }

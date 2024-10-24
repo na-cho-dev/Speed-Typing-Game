@@ -1,12 +1,11 @@
-const start = document.querySelector("#startGame");
-const seconds = document.querySelector("#seconds");
-const currentWord = document.querySelector("#currentWord");
-const wordInput = document.querySelector("#wordInput");
-const message1 = document.querySelector("#message1");
-const message2 = document.querySelector("#message2");
-const timeDisplay = document.querySelector("#timeLeft");
-const scoreDisplay = document.querySelector("#score");
-const difficulty = document.querySelector("#levels");
+const start = document.querySelector('#startGame');
+const seconds = document.querySelector('#seconds');
+const currentWord = document.querySelector('#currentWord');
+const wordInput = document.querySelector('#wordInput');
+const message = document.querySelector('#message');
+const timeDisplay = document.querySelector('#timeLeft');
+const scoreDisplay = document.querySelector('#score');
+const difficulty = document.querySelector('#levels');
 
 //Available Levels
 const levels = {
@@ -15,9 +14,9 @@ const levels = {
   hard: 2,
 };
 
-window.addEventListener("load", setDifficulty);
-start.addEventListener("click", init);
-difficulty.addEventListener("change", selectValue);
+window.addEventListener('load', setDifficulty);
+start.addEventListener('click', init);
+difficulty.addEventListener('change', selectValue);
 
 // Globals
 let currentLevel = levels.easy;
@@ -26,86 +25,68 @@ let score = 0;
 let isPlaying;
 let countInterval;
 
-function setDifficulty() {
-  if (difficulty.value == "easy") {
-    currentLevel = levels.easy;
-    time = currentLevel;
-    // Show number of seconds in UI
-    seconds.innerHTML = currentLevel;
-  } else if (difficulty.value == "medium") {
-    currentLevel = levels.medium;
-    time = currentLevel;
-    // Show number of seconds in UI
-    seconds.innerHTML = currentLevel;
-  } else if (difficulty.value == "hard") {
-    currentLevel = levels.hard;
-    time = currentLevel;
-    // Show number of seconds in UI
-    seconds.innerHTML = currentLevel;
-  } else {
-    currentLevel = 0;
-    time = currentLevel;
-  }
-}
-
-function selectValue() {
-  if (difficulty.value == "easy") {
-    currentLevel = levels.easy;
-    time = currentLevel;
-    // Show number of seconds in UI
-    seconds.innerHTML = currentLevel;
-  } else if (difficulty.value == "medium") {
-    currentLevel = levels.medium;
-    time = currentLevel;
-    // Show number of seconds in UI
-    seconds.innerHTML = currentLevel;
-  } else if (difficulty.value == "hard") {
-    currentLevel = levels.hard;
-    time = currentLevel;
-    // Show number of seconds in UI
-    seconds.innerHTML = currentLevel;
-  } else {
-    currentLevel = 0;
-    time = currentLevel;
-  }
-}
-
 const words = [
-  "Hat",
-  "River",
-  "Lucky",
-  "Relief",
-  "Sober",
-  "Green",
-  "Statue",
-  "Generate",
-  "Display",
-  "Stubborn",
-  "Runaway",
-  "Cocktail",
-  "Establish",
-  "Javascript",
-  "Revolver",
-  "Siblings",
-  "Developer",
-  "Definition",
-  "Investigate",
-  "Magic",
-  "Space",
-  "Evolution",
-  "Stars",
-  "Cosmos",
-  "Coding",
-  "Fortune",
-  "Echo",
-  "Print",
-  "Joke",
-  "Master",
+  'Hat',
+  'River',
+  'Lucky',
+  'Relief',
+  'Sober',
+  'Green',
+  'Statue',
+  'Generate',
+  'Display',
+  'Stubborn',
+  'Runaway',
+  'Cocktail',
+  'Establish',
+  'Javascript',
+  'Revolver',
+  'Siblings',
+  'Developer',
+  'Definition',
+  'Investigate',
+  'Magic',
+  'Space',
+  'Evolution',
+  'Stars',
+  'Cosmos',
+  'Coding',
+  'Fortune',
+  'Echo',
+  'Print',
+  'Joke',
+  'Master',
+  'Apple',
+  'Banana',
+  'Cherry',
+  'Date',
+  'Elderberry',
+  'Fig',
+  'Grape',
+  'Honeydew',
+  'Kiwi',
+  'Lemon',
+  'Mango',
+  'Nectarine',
+  'Orange',
+  'Papaya',
+  'Quince',
+  'Raspberry',
+  'Strawberry',
+  'Tangerine',
+  'Ugli',
+  'Vanilla',
+  'Watermelon',
+  'Xigua',
+  'Yellow',
+  'Zucchini',
+  'Apricot',
+  'Blueberry',
+  'Cantaloupe',
+  'Dragonfruit',
+  'Fig',
+  'Guava',
 ];
-
-// Disable Input and Levels field
-wordInput.disabled = true;
-difficulty.disabled = false;
 
 // Initialize Game
 function init() {
@@ -115,7 +96,7 @@ function init() {
   wordInput.focus();
   timeDisplay.innerHTML = time;
   // console.log("Game has been Initialized");
-  start.style.display = "none";
+  start.style.display = 'none';
 
   // Load Word From Array
   showWord(words);
@@ -124,7 +105,7 @@ function init() {
   countInterval = setInterval(countDown, 1000);
 
   // Start matching on word input
-  wordInput.addEventListener("input", startMatch);
+  wordInput.addEventListener('input', startMatch);
 
   // Check Game Status
   setInterval(checkStatus, 50);
@@ -134,33 +115,7 @@ function init() {
   time = currentLevel;
 
   // Remove Game Over Message
-  message1.style.display = "none";
-}
-
-// Start Match
-function startMatch() {
-  if (matchWords()) {
-    //console.log("MATCHED!!!");
-    isPlaying = true;
-    time = currentLevel + 1;
-    showWord(words);
-    wordInput.value = "";
-    score++;
-  }
-
-  scoreDisplay.innerHTML = score;
-}
-
-// Match Current word to the word input
-function matchWords() {
-  if (wordInput.value === currentWord.innerHTML) {
-    message2.style.display = "block";
-
-    return true;
-  } else {
-    //message.innerHTML = '...';
-    return false;
-  }
+  message.style.display = 'none';
 }
 
 //Pick & Show random word
@@ -180,7 +135,11 @@ function countDown() {
   } else if (time === 0) {
     //Game Over
     isPlaying = false;
-    message2.style.display = "none";
+    message.classList.remove('success');
+    void message.offsetWidth;
+    message.style.display = 'block';
+    message.innerHTML = 'Game Over!!!';
+    message.classList.add('failure');
 
     // SET THE HIGH SCORE
     increaseScore();
@@ -190,36 +149,41 @@ function countDown() {
   //console.log(score);
 }
 
-function checkStatus() {
-  if (!isPlaying && time === 0) {
-    clearInterval(countInterval);
-    time = currentLevel;
-    // message1.innerHTML = "Game Over!!!";
-    message1.style.display = "block";
-
-    score = 0;
-    //Disable input field
-    wordInput.disabled = true;
-    difficulty.disabled = false;
-    wordInput.value = "";
-
-    start.style.display = "block";
+// Start Match
+function startMatch() {
+  if (matchWords()) {
+    //console.log("MATCHED!!!");
+    isPlaying = true;
+    time = currentLevel + 1;
+    showWord(words);
+    wordInput.value = '';
+    score++;
   }
+
+  scoreDisplay.innerHTML = score;
 }
 
-// LOCAL STORAGE SCRIPT
-let easyScore = document.querySelector("#easyScore");
-let medScore = document.querySelector("#medScore");
-let hardScore = document.querySelector("#hardScore");
+// Match Current word to the word input
+function matchWords() {
+  if (wordInput.value === currentWord.innerHTML) {
+    message.classList.remove('success');
+    message.classList.remove('failure');
+    void message.offsetWidth;
+    message.style.display = 'block';
+    message.innerHTML = 'Correct';
+    message.classList.add('success');
 
-let newEasyScore = 0;
-let newMedScore = 0;
-let newHardScore = 0;
+    return true;
+  } else {
+    //message.innerHTML = '...';
+    return false;
+  }
+}
 
 //Create Function to Increase Score to High Score
 let increaseScore = () => {
   //const scores = getScores();
-  let checkScore = JSON.parse(localStorage.getItem("Scores"));
+  let checkScore = JSON.parse(localStorage.getItem('Scores'));
 
   let checkEasyScore = checkScore[0].Easy;
   let checkMedScore = checkScore[0].Medium;
@@ -240,9 +204,118 @@ let increaseScore = () => {
   //console.log(checkMedScore);
 };
 
+// Create function to add Score to the score UI
+let updateScore = () => {
+  if (difficulty.value == 'easy') {
+    let easyScoreUpd = JSON.parse(localStorage.getItem('Scores'));
+
+    newEasyScore = score;
+    easyScoreUpd[0].Easy = score;
+    localStorage.setItem('Scores', JSON.stringify(easyScoreUpd));
+    easyScore.innerHTML = easyScoreUpd[0].Easy;
+
+    //console.log(easyScoreUpd);
+  } else if (difficulty.value == 'medium') {
+    let medScoreUpd = JSON.parse(localStorage.getItem('Scores'));
+
+    newMedScore = score;
+    medScoreUpd[0].Medium = score;
+    localStorage.setItem('Scores', JSON.stringify(medScoreUpd));
+    medScore.innerHTML = medScoreUpd[0].Medium;
+
+    //console.log(medScoreUpd);
+  } else if (difficulty.value == 'hard') {
+    let hardScoreUpd = JSON.parse(localStorage.getItem('Scores'));
+
+    newHardScore = score;
+    hardScoreUpd[0].Hard = score;
+    localStorage.setItem('Scores', JSON.stringify(hardScoreUpd));
+    hardScore.innerHTML = hardScoreUpd[0].Hard;
+
+    //console.log(hardScoreUpd);
+  }
+};
+
+function checkStatus() {
+  if (!isPlaying && time === 0) {
+    clearInterval(countInterval);
+    time = currentLevel;
+    message.classList.remove('success');
+    void message.offsetWidth;
+    message.style.display = 'block';
+    message.innerHTML = 'Game Over!!!';
+    message.classList.add('failure');
+
+    score = 0;
+    //Disable input field
+    wordInput.disabled = true;
+    difficulty.disabled = false;
+    wordInput.value = '';
+
+    start.style.display = 'block';
+  }
+}
+
+function setDifficulty() {
+  if (difficulty.value == 'easy') {
+    currentLevel = levels.easy;
+    time = currentLevel;
+    // Show number of seconds in UI
+    seconds.innerHTML = currentLevel;
+  } else if (difficulty.value == 'medium') {
+    currentLevel = levels.medium;
+    time = currentLevel;
+    // Show number of seconds in UI
+    seconds.innerHTML = currentLevel;
+  } else if (difficulty.value == 'hard') {
+    currentLevel = levels.hard;
+    time = currentLevel;
+    // Show number of seconds in UI
+    seconds.innerHTML = currentLevel;
+  } else {
+    currentLevel = 0;
+    time = currentLevel;
+  }
+}
+
+function selectValue() {
+  if (difficulty.value == 'easy') {
+    currentLevel = levels.easy;
+    time = currentLevel;
+    // Show number of seconds in UI
+    seconds.innerHTML = currentLevel;
+  } else if (difficulty.value == 'medium') {
+    currentLevel = levels.medium;
+    time = currentLevel;
+    // Show number of seconds in UI
+    seconds.innerHTML = currentLevel;
+  } else if (difficulty.value == 'hard') {
+    currentLevel = levels.hard;
+    time = currentLevel;
+    // Show number of seconds in UI
+    seconds.innerHTML = currentLevel;
+  } else {
+    currentLevel = 0;
+    time = currentLevel;
+  }
+}
+
+// Disable Input and Levels field
+wordInput.disabled = true;
+difficulty.disabled = false;
+
+// LOCAL STORAGE SCRIPT
+let easyScore = document.querySelector('#easyScore');
+let medScore = document.querySelector('#medScore');
+let hardScore = document.querySelector('#hardScore');
+
+let newEasyScore = 0;
+let newMedScore = 0;
+let newHardScore = 0;
+
 let getScores = () => {
   let scores;
-  if (localStorage.getItem("Scores") === null) {
+  if (localStorage.getItem('Scores') === null) {
     scores = [
       {
         Easy: newEasyScore,
@@ -251,75 +324,37 @@ let getScores = () => {
       },
     ];
 
-    localStorage.setItem("Scores", JSON.stringify(scores));
+    localStorage.setItem('Scores', JSON.stringify(scores));
   } else {
-    scores = JSON.parse(localStorage.getItem("Scores"));
+    scores = JSON.parse(localStorage.getItem('Scores'));
   }
 
-  let genScoreUpd = JSON.parse(localStorage.getItem("Scores"));
+  let genScoreUpd = JSON.parse(localStorage.getItem('Scores'));
   easyScore.innerHTML = genScoreUpd[0].Easy;
   medScore.innerHTML = genScoreUpd[0].Medium;
   hardScore.innerHTML = genScoreUpd[0].Hard;
 
   return scores;
 };
-window.addEventListener("load", getScores);
-
-// const addScoreToStorage = () => {
-//     const scores = getScores();
-
-//     //Add Score to UI
-//     updateScore();
-// }
-
-// Create function to add Score to the score UI
-let updateScore = () => {
-  if (difficulty.value == "easy") {
-    let easyScoreUpd = JSON.parse(localStorage.getItem("Scores"));
-
-    newEasyScore = score;
-    easyScoreUpd[0].Easy = score;
-    localStorage.setItem("Scores", JSON.stringify(easyScoreUpd));
-    easyScore.innerHTML = easyScoreUpd[0].Easy;
-
-    //console.log(easyScoreUpd);
-  } else if (difficulty.value == "medium") {
-    let medScoreUpd = JSON.parse(localStorage.getItem("Scores"));
-
-    newMedScore = score;
-    medScoreUpd[0].Medium = score;
-    localStorage.setItem("Scores", JSON.stringify(medScoreUpd));
-    medScore.innerHTML = medScoreUpd[0].Medium;
-
-    //console.log(medScoreUpd);
-  } else if (difficulty.value == "hard") {
-    let hardScoreUpd = JSON.parse(localStorage.getItem("Scores"));
-
-    newHardScore = score;
-    hardScoreUpd[0].Hard = score;
-    localStorage.setItem("Scores", JSON.stringify(hardScoreUpd));
-    hardScore.innerHTML = hardScoreUpd[0].Hard;
-
-    //console.log(hardScoreUpd);
-  }
-};
+window.addEventListener('load', getScores);
 
 // MODAL SCRIPT
-let mainModal = document.querySelector(".mainModal");
+let mainModal = document.querySelector('.mainModal');
 //let modal = document.querySelector('.modal');
-let highScore = document.querySelector("#highScore");
-let closeModal = document.querySelector(".closeModal");
+let highScore = document.querySelector('#highScore');
+let closeModal = document.querySelector('.closeModal');
 
 let hideModal = () => {
-  mainModal.style.display = "none";
+  mainModal.style.display = 'none';
 };
 let close = () => {
-  mainModal.style.display = "none";
+  mainModal.style.display = 'none';
 };
 let openModal = () => {
-  mainModal.style.display = "flex";
+  mainModal.style.display = 'flex';
 };
 
-window.addEventListener("load", hideModal);
-highScore.addEventListener("click", openModal);
-closeModal.addEventListener("click", close);
+window.addEventListener('load', hideModal);
+highScore.addEventListener('click', openModal);
+closeModal.addEventListener('click', close);
+mainModal.addEventListener('click', close);
