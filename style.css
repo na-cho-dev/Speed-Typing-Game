@@ -234,9 +234,9 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-/* section {
-  background-color: aqua;
-} */
+section {
+  min-height: 85vh;
+}
 
 footer {
   background-color: #552406;
